@@ -32,7 +32,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, setCollapsed }) => 
 
   return (
     <aside
-      className={`fixed top-16 bottom-0 left-0 z-40 bg-[#06132D]/95 border-r border-[#06D9FF]/15 transition-all duration-300 flex flex-col justify-between ${
+      className={`fixed top-16 bottom-0 left-0 z-40 bg-slate-950/65 backdrop-blur-2xl border-r border-white/15 shadow-2xl transition-all duration-300 flex flex-col justify-between ${
         collapsed ? 'w-16' : 'w-64'
       }`}
     >
@@ -47,32 +47,42 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, setCollapsed }) => 
                 to={item.to}
                 end={item.end}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-medium transition-all group ${
+                  `flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-xs font-medium transition-all group ${
                     isActive
-                      ? 'bg-[#2563EB]/25 text-[#06D9FF] border border-[#06D9FF]/30 shadow-glow-cyan'
-                      : 'text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#0B1730]'
+                      ? 'bg-gradient-to-r from-blue-600/30 via-amber-500/15 to-transparent border-l-4 border-amber-400 text-white shadow-[0_0_16px_rgba(245,158,11,0.2)] font-semibold'
+                      : 'text-slate-300 hover:text-white hover:bg-white/10'
                   }`
                 }
                 title={collapsed ? item.label : undefined}
               >
-                <Icon className="w-4 h-4 shrink-0 transition-transform group-hover:scale-110" />
-                {!collapsed && <span>{item.label}</span>}
+                {({ isActive }) => (
+                  <>
+                    <Icon
+                      className={`w-4 h-4 shrink-0 transition-transform group-hover:scale-110 ${
+                        isActive ? 'text-amber-400' : 'text-slate-400 group-hover:text-white'
+                      }`}
+                    />
+                    {!collapsed && <span className="tracking-wide">{item.label}</span>}
+                  </>
+                )}
               </NavLink>
             );
           })}
         </nav>
 
         {!collapsed && (
-          <div className="pt-4 border-t border-white/5 space-y-2">
-            <span className="px-3 text-[10px] font-mono uppercase text-[#94A3B8]/60 tracking-wider">
+          <div className="pt-4 border-t border-white/10 space-y-2">
+            <span className="px-3 text-[10px] font-mono tracking-wider text-slate-400 font-semibold uppercase">
               Quick Resources
             </span>
-            <div className="bg-[#0B1730] p-3 rounded-lg border border-white/5 space-y-2">
-              <div className="flex items-center gap-2 text-xs text-[#F8FAFC] font-semibold">
-                <ShieldAlert className="w-3.5 h-3.5 text-[#06D9FF]" />
-                <span>Forensics Rulebook</span>
+            <div className="p-3 rounded-lg bg-slate-900/70 backdrop-blur-md border border-white/15 hover:border-amber-400/50 hover:shadow-[0_0_16px_rgba(245,158,11,0.25)] transition cursor-pointer group">
+              <div className="flex items-center gap-2 mb-1.5">
+                <ShieldAlert className="w-4 h-4 text-blue-400 group-hover:text-amber-400 transition" />
+                <span className="text-xs font-semibold text-slate-200 group-hover:text-amber-300 transition">
+                  Forensics Rulebook
+                </span>
               </div>
-              <p className="text-[10px] text-[#94A3B8] leading-tight">
+              <p className="text-[11px] leading-relaxed text-slate-400">
                 6 rule heuristics, Isolation Forest anomaly scoring & Random Forest classification.
               </p>
             </div>
@@ -81,15 +91,15 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, setCollapsed }) => 
       </div>
 
       {/* Collapse Toggle */}
-      <div className="p-3 border-t border-white/5 flex items-center justify-between">
+      <div className="p-3 border-t border-white/10 flex items-center justify-between">
         {!collapsed && (
-          <span className="text-[10px] font-mono text-[#94A3B8]/70">
+          <span className="text-[11px] font-mono text-slate-400">
             ChainForensics Core
           </span>
         )}
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="p-1.5 rounded-md text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#0B1730] transition-colors ml-auto"
+          className="p-1.5 rounded-md text-slate-400 hover:text-white hover:bg-white/10 transition-colors ml-auto"
           title={collapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
         >
           {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}

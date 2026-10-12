@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ChainForensics AI - Forensic Operations Command</title>
+<!-- Google Fonts: Sora, Inter & Space Grotesk -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Sora:wght@400;600;700;800&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration with Red-Blue-Yellow Modern Theme -->
+<script data-purpose="tailwind-config">
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              crimson: '#BE123C',
+              crimsonDark: '#881337',
+              cobalt: '#1D4ED8',
+              blue: '#2563EB',
+              amber: '#F59E0B',
+              gold: '#FBBF24',
+              surface: 'rgba(12, 18, 36, 0.82)',
+              surfaceCard: 'rgba(15, 23, 42, 0.78)',
+              surfaceInner: 'rgba(9, 14, 28, 0.85)'
+            }
+          },
+          fontFamily: {
+            headline: ['Sora', 'sans-serif'],
+            display: ['Sora', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+            label: ['Space Grotesk', 'monospace'],
+            mono: ['Space Grotesk', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+            sans: ['Sora', 'Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+<!-- Striking Red-Blue-Yellow Dynamic Atmospheric Glow & Glassmorphism -->
+<style data-purpose="atmospheric-effects">
+    body {
+      background-color: #0b1120;
+      color: #F8FAFC;
+      position: relative;
+      overflow-x: hidden;
+      font-family: 'Sora', sans-serif;
+    }
+    /* Dynamic energetic Red-Blue-Yellow mesh / radial gradient background */
+    .rby-canvas-bg {
+      background-color: #0c1222;
+      background-image: 
+        radial-gradient(circle at 10% 15%, rgba(190, 18, 60, 0.42) 0%, transparent 45%),
+        radial-gradient(circle at 88% 20%, rgba(29, 78, 216, 0.45) 0%, transparent 48%),
+        radial-gradient(circle at 50% 65%, rgba(217, 119, 6, 0.28) 0%, transparent 52%),
+        radial-gradient(circle at 85% 85%, rgba(136, 19, 55, 0.35) 0%, transparent 45%),
+        radial-gradient(circle at 20% 80%, rgba(37, 99, 235, 0.32) 0%, transparent 45%);
+      background-attachment: fixed;
+    }
+    .rby-grid-pattern {
+      background-image: 
+        linear-gradient(to right, rgba(245, 158, 11, 0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(59, 130, 246, 0.08) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .status-pulse-amber {
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.85);
+    }
+    /* Frosted Glass Panels with Tinted Red-Blue-Yellow Border Accents */
+    .rby-panel {
+      background: rgba(13, 20, 38, 0.80);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+      transition: all 0.25s ease;
+    }
+    .rby-panel:hover {
+      border-color: rgba(245, 158, 11, 0.38);
+      box-shadow: 0 12px 36px -8px rgba(30, 58, 138, 0.4);
+    }
+    .rby-panel-blue {
+      border-top: 2px solid #3B82F6;
+      border-color: rgba(59, 130, 246, 0.35);
+    }
+    .rby-panel-amber {
+      border-top: 2px solid #F59E0B;
+      border-color: rgba(245, 158, 11, 0.35);
+    }
+    .rby-panel-red {
+      border-top: 2px solid #EF4444;
+      border-color: rgba(239, 68, 68, 0.35);
+    }
+    .rby-amber-glow {
+      box-shadow: 0 0 16px rgba(245, 158, 11, 0.45);
+    }
+    .rby-amber-glow:hover {
+      box-shadow: 0 0 24px rgba(245, 158, 11, 0.65);
+    }
+    .rby-red-glow {
+      box-shadow: 0 0 18px rgba(225, 29, 72, 0.4);
+    }
+  </style>
+</head>
+<body class="rby-canvas-bg min-h-screen font-sans flex flex-col antialiased selection:bg-[#F59E0B] selection:text-slate-950">
+<!-- BEGIN: TopHeader -->
+<header class="border-b border-white/15 bg-slate-950/70 backdrop-blur-xl sticky top-0 z-50 px-4 lg:px-6 h-16 flex items-center justify-between shadow-lg shadow-black/20">
+<!-- Left: Logo & Core Navigation -->
+<div class="flex items-center space-x-6">
+<!-- Brand Logo -->
+<a class="flex items-center gap-2.5 group" href="#">
+<div class="w-9 h-9 rounded-lg bg-gradient-to-br from-red-600 via-amber-500 to-blue-600 p-[1.5px] shadow-[0_0_16px_rgba(245,158,11,0.45)] group-hover:shadow-[0_0_22px_rgba(245,158,11,0.7)] transition-all">
+<div class="w-full h-full rounded-[7px] bg-slate-950/85 backdrop-blur-md flex items-center justify-center text-amber-400">
+<svg class="w-5 h-5 stroke-current" fill="none" stroke-width="2" viewbox="0 0 24 24">
+<path d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5 leading-none">
+<span class="font-extrabold tracking-wider text-base text-white">CHAIN<span class="text-blue-400 drop-shadow-[0_0_8px_rgba(59,130,246,0.6)]">FORENSICS</span></span>
+<span class="px-1.5 py-0.5 text-[9px] font-mono font-bold rounded bg-amber-400/20 text-amber-300 border border-amber-400/40 leading-none">AI</span>
+</div>
+<span class="text-[9px] font-mono tracking-widest text-slate-300 font-semibold mt-1">BLOCKCHAIN INTELLIGENCE</span>
+</div>
+</a>
+<!-- Horizontal Links -->
+<nav class="hidden md:flex items-center gap-1 text-sm font-medium text-slate-300 ml-4">
+<a class="px-3 py-1.5 rounded-md bg-amber-500/20 text-amber-300 border border-amber-400/50 shadow-[0_0_12px_rgba(245,158,11,0.25)] font-semibold" href="#">Dashboard</a>
+<a class="px-3 py-1.5 rounded-md text-slate-300 hover:text-white hover:bg-white/10 transition" href="#">New Investigation</a>
+<a class="px-3 py-1.5 rounded-md text-slate-300 hover:text-white hover:bg-white/10 transition" href="#">Fund Tracing</a>
+<a class="px-3 py-1.5 rounded-md text-slate-300 hover:text-white hover:bg-white/10 transition" href="#">History</a>
+<a class="px-3 py-1.5 rounded-md text-slate-300 hover:text-white hover:bg-white/10 transition" href="#">Reports</a>
+</nav>
+</div>
+<!-- Right: Status Pill & Action Buttons -->
+<div class="flex items-center gap-3">
+<div class="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/80 backdrop-blur-md border border-amber-500/30 text-xs font-mono shadow-[0_0_12px_rgba(245,158,11,0.15)]">
+<span class="w-2 h-2 rounded-full bg-amber-400 status-pulse-amber animate-pulse"></span>
+<span class="text-slate-300">Engine:</span>
+<span class="text-amber-400 font-bold">Degraded</span>
+</div>
+<button class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-md text-xs font-semibold bg-gradient-to-r from-red-600 via-rose-600 to-red-700 hover:from-red-500 hover:to-rose-500 text-white shadow-md rby-red-glow transition border border-rose-400/40" type="button">
+<svg class="w-3.5 h-3.5 fill-current" viewbox="0 0 24 24">
+<path d="M8 5v14l11-7z"></path>
+</svg>
+<span>Demo Access</span>
+</button>
+<a class="text-xs font-semibold text-slate-200 hover:text-amber-300 px-2 py-1.5 transition" href="#">
+        Sign In
+      </a>
+</div>
+</header>
+<!-- END: TopHeader -->
+<!-- BEGIN: MainLayoutWrapper -->
+<div class="flex flex-1">
+<!-- BEGIN: LeftSidebar -->
+<aside class="w-64 border-r border-white/15 bg-slate-950/65 backdrop-blur-2xl hidden lg:flex flex-col justify-between py-5 shrink-0 shadow-2xl">
+<div class="space-y-6">
+<!-- Main Sidebar Navigation Menu -->
+<nav class="px-3 space-y-1">
+<a class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-semibold bg-gradient-to-r from-blue-600/30 via-amber-500/15 to-transparent border-l-4 border-amber-400 text-white shadow-[0_0_16px_rgba(245,158,11,0.2)]" href="#">
+<svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="tracking-wide">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/10 transition" href="#">
+<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>New Investigation</span>
+</a>
+<a class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/10 transition" href="#">
+<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Wallet Network</span>
+</a>
+<a class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/10 transition" href="#">
+<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Investigation History</span>
+</a>
+<a class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/10 transition" href="#">
+<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Reports</span>
+</a>
+<a class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/10 transition" href="#">
+<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>System &amp; Diagnostics</span>
+</a>
+</nav>
+<!-- Quick Resources Section -->
+<div class="px-3 pt-4 border-t border-white/10">
+<div class="px-3 mb-2.5 text-[10px] font-mono tracking-wider text-slate-400 font-semibold uppercase">Quick Resources</div>
+<div class="p-3 rounded-lg bg-slate-900/70 backdrop-blur-md border border-white/15 hover:border-amber-400/50 hover:shadow-[0_0_16px_rgba(245,158,11,0.25)] transition cursor-pointer group">
+<div class="flex items-center gap-2 mb-1.5">
+<svg class="w-4 h-4 text-blue-400 group-hover:text-amber-400 transition" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="text-xs font-semibold text-slate-200 group-hover:text-amber-300 transition">Forensics Rulebook</span>
+</div>
+<p class="text-[11px] leading-relaxed text-slate-400">
+              6 rule heuristics, Isolation Forest anomaly scoring &amp; Random Forest classification.
+            </p>
+</div>
+</div>
+</div>
+<!-- Collapsible Footer Profile / Build info -->
+<div class="px-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
+<span class="font-mono text-[11px] text-slate-400">ChainForensics Core</span>
+<svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</aside>
+<!-- END: LeftSidebar -->
+<!-- BEGIN: MainContent -->
+<main class="flex-1 p-4 lg:p-7 space-y-6 overflow-y-auto max-w-[1750px] mx-auto w-full">
+<!-- Top Title Bar & Search Command -->
+<section class="space-y-5" data-purpose="command-header">
+<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+<!-- Heading & Subtitle -->
+<div>
+<h1 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight flex items-center gap-2 font-headline drop-shadow-[0_2px_14px_rgba(0,0,0,0.6)]">
+              Forensic Operations Command
+            </h1>
+<p class="text-sm text-slate-200 mt-1 font-body">
+              Monitor blockchain transaction flows, evaluate anomaly markers, and launch deep investigations.
+            </p>
+</div>
+<!-- Top-right Action Buttons -->
+<div class="flex items-center gap-2.5 self-start md:self-auto">
+<!-- Refresh Button -->
+<button class="w-9 h-9 rounded-lg bg-slate-900/80 backdrop-blur-md border border-white/20 flex items-center justify-center text-slate-200 hover:text-amber-300 hover:border-amber-400/60 hover:shadow-[0_0_14px_rgba(245,158,11,0.3)] transition" title="Refresh state" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<!-- New Investigation Button -->
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-red-600 via-rose-600 to-amber-500 hover:from-red-500 hover:to-amber-400 text-white font-semibold text-sm shadow-lg rby-amber-glow border border-amber-400/40 transition" type="button">
+<svg class="w-4 h-4 stroke-[2.5]" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>New Investigation</span>
+</button>
+</div>
+</div>
+<!-- Global Address Search Bar -->
+<div class="relative w-full">
+<div class="flex items-center rounded-xl bg-slate-900/80 backdrop-blur-xl border border-white/20 focus-within:border-amber-400 focus-within:ring-2 focus-within:ring-amber-400/40 focus-within:shadow-[0_0_24px_rgba(245,158,11,0.3)] transition-all p-1.5 shadow-xl">
+<div class="pl-3.5 pr-2 text-blue-400">
+<svg class="w-4 h-4 text-blue-400 drop-shadow-[0_0_8px_rgba(59,130,246,0.7)]" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<input class="w-full bg-transparent border-0 text-sm text-white placeholder-slate-400 focus:ring-0 focus:outline-none py-1.5 font-mono" placeholder="Quick search Ethereum address (0x...) or transaction hash..." type="text"/>
+<button class="px-4 py-1.5 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-semibold tracking-wide transition shrink-0 shadow-md border border-blue-400/40 font-label shadow-blue-500/20" type="button">
+              Inspect
+            </button>
+</div>
+</div>
+</section>
+<!-- BEGIN: KPI Metrics Grid -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" data-purpose="metrics-summary">
+<!-- Card 1: TOTAL INVESTIGATIONS -->
+<div class="rby-panel rby-panel-blue rounded-xl p-4 flex flex-col justify-between">
+<div class="flex items-center justify-between text-xs font-mono font-semibold text-slate-300">
+<span class="tracking-wider">TOTAL INVESTIGATIONS</span>
+<span class="text-blue-400 drop-shadow-[0_0_8px_rgba(59,130,246,0.7)]">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</span>
+</div>
+<div class="my-3">
+<span class="text-3xl font-extrabold text-white font-mono tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">0</span>
+</div>
+<div class="text-xs text-slate-400">
+            No saved cases yet
+          </div>
+</div>
+<!-- Card 2: TRANSACTIONS ANALYZED -->
+<div class="rby-panel rby-panel-amber rounded-xl p-4 flex flex-col justify-between">
+<div class="flex items-center justify-between text-xs font-mono font-semibold text-slate-300">
+<span class="tracking-wider">TRANSACTIONS ANALYZED</span>
+<span class="text-amber-400 drop-shadow-[0_0_8px_rgba(245,158,11,0.7)]">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</span>
+</div>
+<div class="my-3">
+<span class="text-3xl font-extrabold text-white font-mono tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">0</span>
+</div>
+<div class="text-xs text-slate-400">
+            0.00 ETH cumulative volume
+          </div>
+</div>
+<!-- Card 3: REQUIRES REVIEW -->
+<div class="rby-panel rby-panel-red rounded-xl p-4 flex flex-col justify-between">
+<div class="flex items-center justify-between text-xs font-mono font-semibold text-slate-300">
+<span class="tracking-wider">REQUIRES REVIEW</span>
+<span class="text-red-400 drop-shadow-[0_0_8px_rgba(239,68,68,0.7)]">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</span>
+</div>
+<div class="my-3">
+<span class="text-3xl font-extrabold text-red-400 font-mono tracking-tight drop-shadow-[0_0_12px_rgba(239,68,68,0.6)]">0</span>
+</div>
+<div class="text-xs text-slate-400">
+            High-risk or critical rule triggers
+          </div>
+</div>
+<!-- Card 4: AI ENGINE STATUS -->
+<div class="rby-panel rby-panel-amber rounded-xl p-4 flex flex-col justify-between">
+<div class="flex items-center justify-between text-xs font-mono font-semibold text-slate-300">
+<span class="tracking-wider">AI ENGINE STATUS</span>
+<span class="text-amber-400 drop-shadow-[0_0_8px_rgba(245,158,11,0.7)]">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M9 3v2m6-2v2M9 19v2m6-2v2M3 9h2m-2 6h2m14-6h2m-2 6h2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</span>
+</div>
+<div class="my-3 flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-amber-400 status-pulse-amber"></span>
+<span class="text-2xl font-bold text-amber-300 tracking-tight drop-shadow-[0_0_8px_rgba(245,158,11,0.4)]">Degraded</span>
+</div>
+<div class="text-xs text-slate-400 font-mono">
+            FastAPI + Isolation Forest
+          </div>
+</div>
+</section>
+<!-- END: KPI Metrics Grid -->
+<!-- BEGIN: Telemetry and Service Connectivity Section -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-5" data-purpose="telemetry-connectivity">
+<!-- Left: Investigation Activity & Risk Metrics (Telemetry Chart Area) -->
+<div class="lg:col-span-8 rby-panel rounded-xl p-5 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-1">
+<h2 class="text-base font-bold text-white font-headline">Investigation Activity &amp; Risk Metrics</h2>
+<span class="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-medium text-blue-300 bg-blue-500/20 border border-blue-400/40 shadow-[0_0_10px_rgba(59,130,246,0.3)]">
+                Live Telemetry
+              </span>
+</div>
+<p class="text-xs text-slate-300 font-body">
+              Transaction count and risk profile progression across investigations
+            </p>
+</div>
+<!-- Empty Chart Canvas & Heartbeat / Pulse Backdrop with Red-Blue-Yellow Accentuation -->
+<div class="my-6 min-h-[175px] rounded-lg border border-white/15 bg-slate-950/75 rby-grid-pattern flex flex-col items-center justify-center p-6 relative overflow-hidden group">
+<!-- Glowing Waveform in Background with Red-Amber Blend -->
+<svg class="absolute inset-x-0 bottom-6 w-full h-16 stroke-amber-500/50 stroke-[2] fill-none drop-shadow-[0_0_12px_rgba(245,158,11,0.6)]" preserveaspectratio="none" viewbox="0 0 500 100">
+<path d="M0,50 L120,50 L140,20 L160,80 L180,45 L190,55 L200,50 L340,50 L355,10 L370,90 L385,50 L500,50"></path>
+</svg>
+<div class="relative z-10 text-center space-y-2">
+<p class="text-sm text-slate-200">
+                No investigation activity records yet.
+              </p>
+<a class="inline-flex items-center text-sm font-semibold text-amber-400 hover:text-amber-300 transition" href="#">
+                Run your first investigation <span class="ml-1">→</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Right: Service Connectivity Status -->
+<div class="lg:col-span-4 rby-panel rounded-xl p-5 flex flex-col justify-between">
+<div class="mb-3">
+<h2 class="text-base font-bold text-white font-headline">Service Connectivity</h2>
+</div>
+<div class="space-y-2.5 font-mono text-xs">
+<!-- Service 1: Backend API -->
+<div class="flex items-center justify-between p-3 rounded-lg bg-slate-900/70 border border-blue-500/30 hover:border-blue-400/60 transition shadow-sm">
+<div class="flex items-center gap-2.5 text-slate-200 font-sans">
+<svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9 3v2m6-2v2M9 19v2m6-2v2M3 9h2m-2 6h2m14-6h2m-2 6h2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="text-xs font-semibold font-mono text-white">Backend API (Node)</span>
+</div>
+<span class="text-blue-400 font-semibold drop-shadow-[0_0_6px_rgba(59,130,246,0.5)]">Port 4321</span>
+</div>
+<!-- Service 2: Python AI -->
+<div class="flex items-center justify-between p-3 rounded-lg bg-slate-900/70 border border-amber-500/30 hover:border-amber-400/60 transition shadow-sm">
+<div class="flex items-center gap-2.5 text-slate-200 font-sans">
+<svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="text-xs font-semibold font-mono text-white">Python AI (FastAPI)</span>
+</div>
+<span class="text-amber-400 font-semibold animate-pulse drop-shadow-[0_0_8px_rgba(245,158,11,0.6)]">Connecting...</span>
+</div>
+<!-- Service 3: Ethereum JSON-RPC -->
+<div class="flex items-center justify-between p-3 rounded-lg bg-slate-900/70 border border-blue-500/30 hover:border-blue-400/60 transition shadow-sm">
+<div class="flex items-center gap-2.5 text-slate-200 font-sans">
+<svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="text-xs font-semibold font-mono text-white">Ethereum JSON-RPC</span>
+</div>
+<span class="text-blue-300 font-semibold drop-shadow-[0_0_6px_rgba(147,197,253,0.5)]">Active</span>
+</div>
+<!-- Service 4: Database Storage -->
+<div class="flex items-center justify-between p-3 rounded-lg bg-slate-900/70 border border-white/10 hover:border-amber-400/40 transition shadow-sm">
+<div class="flex items-center gap-2.5 text-slate-200 font-sans">
+<svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="text-xs font-semibold font-mono text-white">Database Storage</span>
+</div>
+<span class="text-slate-300 font-medium">Memory Cache</span>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Telemetry and Service Connectivity Section -->
+<!-- BEGIN: RecentForensicInvestigationsTable -->
+<section class="rby-panel rounded-xl p-5 overflow-hidden" data-purpose="cases-table">
+<!-- Table Header & View Link -->
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+<div>
+<h2 class="text-base font-bold text-white font-headline">Recent Forensic Investigations</h2>
+<p class="text-xs text-slate-300 font-body">Previous wallet audits and transaction classifications</p>
+</div>
+<a class="inline-flex items-center text-xs font-semibold text-amber-400 hover:text-amber-300 transition" href="#">
+            View All Cases <span class="ml-1">→</span>
+</a>
+</div>
+<!-- Table Structure -->
+<div class="overflow-x-auto">
+<table class="w-full text-left font-mono text-xs border-collapse">
+<thead>
+<tr class="bg-slate-900/90 text-slate-300 font-semibold border-b border-white/15">
+<th class="py-3 px-4" scope="col">IDENTIFIER / TITLE</th>
+<th class="py-3 px-4" scope="col">NETWORK</th>
+<th class="py-3 px-4" scope="col">TIMESTAMP</th>
+<th class="py-3 px-4" scope="col">CLASSIFICATION</th>
+<th class="py-3 px-4" scope="col">DATA SOURCE</th>
+<th class="py-3 px-4 text-right" scope="col">ACTION</th>
+</tr>
+</thead>
+<tbody>
+<!-- Empty State Row matching screenshot -->
+<tr>
+<td class="py-14 text-center" colspan="6">
+<div class="flex flex-col items-center justify-center space-y-2">
+<p class="text-slate-400 text-xs font-mono">
+                      No forensic investigations recorded yet. Click "New Investigation" to begin.
+                    </p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- END: RecentForensicInvestigationsTable -->
+</main>
+<!-- END: MainContent -->
+</div>
+<!-- END: MainLayoutWrapper -->
+</body></html>

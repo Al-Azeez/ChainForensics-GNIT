@@ -9,37 +9,31 @@ interface LogoProps {
 export const Logo: React.FC<LogoProps> = ({ className = '', isLink = true }) => {
   const content = (
     <div className={`flex items-center gap-3 select-none group ${className}`}>
-      {/* Geometric Hex Blockchain Symbol */}
-      <div className="relative w-9 h-9 flex items-center justify-center">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#2563EB] to-[#06D9FF] rounded-lg opacity-25 blur-sm group-hover:opacity-40 transition-opacity"></div>
-        <div className="relative w-9 h-9 bg-[#0B1730] border border-[#06D9FF]/40 rounded-lg flex items-center justify-center shadow-glow-cyan">
-          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      {/* Geometric Hex Blockchain Symbol with Red-Amber-Blue Gradient Border */}
+      <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-red-600 via-amber-500 to-blue-600 p-[1.5px] shadow-[0_0_16px_rgba(245,158,11,0.45)] group-hover:shadow-[0_0_22px_rgba(245,158,11,0.7)] transition-all">
+        <div className="w-full h-full rounded-[7px] bg-slate-950/85 backdrop-blur-md flex items-center justify-center text-amber-400">
+          <svg className="w-5 h-5 stroke-current" fill="none" strokeWidth="2" viewBox="0 0 24 24">
             <path
-              d="M12 2L20 6.5V17.5L12 22L4 17.5V6.5L12 2Z"
-              stroke="#06D9FF"
-              strokeWidth="2"
+              d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"
+              strokeLinecap="round"
               strokeLinejoin="round"
             />
-            <circle cx="12" cy="12" r="3" fill="#2563EB" />
-            <circle cx="12" cy="12" r="1.5" fill="#06D9FF" />
-            <line x1="12" y1="2" x2="12" y2="9" stroke="#06D9FF" strokeWidth="1.5" strokeDasharray="1 1" />
-            <line x1="20" y1="17.5" x2="14.5" y2="13.5" stroke="#06D9FF" strokeWidth="1.5" strokeDasharray="1 1" />
-            <line x1="4" y1="17.5" x2="9.5" y2="13.5" stroke="#06D9FF" strokeWidth="1.5" strokeDasharray="1 1" />
           </svg>
         </div>
       </div>
 
       {/* Typography Wordmark */}
       <div className="flex flex-col">
-        <div className="flex items-center tracking-tight font-bold text-lg leading-tight">
-          <span className="text-[#F8FAFC]">CHAIN</span>
-          <span className="text-[#06D9FF] font-extrabold ml-0.5">FORENSICS</span>
-          <span className="ml-1.5 px-1.5 py-0.5 text-[9px] font-mono font-semibold bg-[#2563EB]/20 text-[#06D9FF] border border-[#06D9FF]/30 rounded">
+        <div className="flex items-center gap-1.5 leading-none">
+          <span className="font-extrabold tracking-wider text-base text-white">
+            CHAIN<span className="text-blue-400 drop-shadow-[0_0_8px_rgba(59,130,246,0.6)]">FORENSICS</span>
+          </span>
+          <span className="px-1.5 py-0.5 text-[9px] font-mono font-bold rounded bg-amber-400/20 text-amber-300 border border-amber-400/40 leading-none">
             AI
           </span>
         </div>
-        <span className="text-[10px] font-mono text-[#94A3B8] tracking-wider uppercase">
-          Blockchain Intelligence
+        <span className="text-[9px] font-mono tracking-widest text-slate-300 font-semibold mt-1">
+          BLOCKCHAIN INTELLIGENCE
         </span>
       </div>
     </div>

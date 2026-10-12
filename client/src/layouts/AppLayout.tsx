@@ -8,7 +8,7 @@ export const AppLayout: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#020817] text-[#F8FAFC] flex flex-col">
+    <div className="min-h-screen rby-canvas-bg text-[#F8FAFC] flex flex-col font-sans">
       {/* Top Navigation */}
       <Navbar />
 
@@ -18,11 +18,11 @@ export const AppLayout: React.FC = () => {
 
         {/* Main Content Area */}
         <main
-          className={`flex-1 transition-all duration-300 p-4 sm:p-6 lg:p-8 ${
+          className={`flex-1 transition-all duration-300 p-4 sm:p-6 lg:p-7 ${
             collapsed ? 'ml-16' : 'ml-64'
           }`}
         >
-          <div className="max-w-7xl mx-auto">
+          <div className="max-w-[1750px] mx-auto w-full">
             <Outlet />
           </div>
         </main>

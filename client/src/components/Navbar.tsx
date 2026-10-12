@@ -28,63 +28,65 @@ export const Navbar: React.FC = () => {
   const isHealthy = health?.status === 'healthy';
 
   return (
-    <nav className="sticky top-0 z-50 bg-[#020817]/90 backdrop-blur-md border-b border-[#06D9FF]/15">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        {/* Logo */}
-        <Logo />
+    <header className="sticky top-0 z-50 border-b border-white/15 bg-slate-950/70 backdrop-blur-xl px-4 lg:px-6 h-16 flex items-center justify-between shadow-lg shadow-black/20">
+      <div className="w-full max-w-[1750px] mx-auto flex items-center justify-between">
+        {/* Left: Logo & Core Navigation */}
+        <div className="flex items-center space-x-6">
+          <Logo />
 
-        {/* Navigation Links */}
-        <div className="hidden md:flex items-center gap-1">
-          <Link
-            to="/app"
-            className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-              location.pathname === '/app'
-                ? 'bg-[#2563EB]/20 text-[#06D9FF] border border-[#06D9FF]/30'
-                : 'text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#0B1730]'
-            }`}
-          >
-            Dashboard
-          </Link>
-          <Link
-            to="/app/investigate"
-            className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-              location.pathname === '/app/investigate'
-                ? 'bg-[#2563EB]/20 text-[#06D9FF] border border-[#06D9FF]/30'
-                : 'text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#0B1730]'
-            }`}
-          >
-            New Investigation
-          </Link>
-          <Link
-            to="/app/network"
-            className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-              location.pathname === '/app/network'
-                ? 'bg-[#2563EB]/20 text-[#06D9FF] border border-[#06D9FF]/30'
-                : 'text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#0B1730]'
-            }`}
-          >
-            Fund Tracing
-          </Link>
-          <Link
-            to="/app/history"
-            className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-              location.pathname === '/app/history'
-                ? 'bg-[#2563EB]/20 text-[#06D9FF] border border-[#06D9FF]/30'
-                : 'text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#0B1730]'
-            }`}
-          >
-            History
-          </Link>
-          <Link
-            to="/app/reports"
-            className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-              location.pathname === '/app/reports'
-                ? 'bg-[#2563EB]/20 text-[#06D9FF] border border-[#06D9FF]/30'
-                : 'text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#0B1730]'
-            }`}
-          >
-            Reports
-          </Link>
+          {/* Navigation Links */}
+          <nav className="hidden md:flex items-center gap-1 text-sm font-medium ml-4">
+            <Link
+              to="/app"
+              className={`px-3 py-1.5 rounded-md text-xs transition-all ${
+                location.pathname === '/app'
+                  ? 'bg-amber-500/20 text-amber-300 border border-amber-400/50 shadow-[0_0_12px_rgba(245,158,11,0.25)] font-semibold'
+                  : 'text-slate-300 hover:text-white hover:bg-white/10'
+              }`}
+            >
+              Dashboard
+            </Link>
+            <Link
+              to="/app/investigate"
+              className={`px-3 py-1.5 rounded-md text-xs transition-all ${
+                location.pathname === '/app/investigate'
+                  ? 'bg-amber-500/20 text-amber-300 border border-amber-400/50 shadow-[0_0_12px_rgba(245,158,11,0.25)] font-semibold'
+                  : 'text-slate-300 hover:text-white hover:bg-white/10'
+              }`}
+            >
+              New Investigation
+            </Link>
+            <Link
+              to="/app/network"
+              className={`px-3 py-1.5 rounded-md text-xs transition-all ${
+                location.pathname === '/app/network'
+                  ? 'bg-amber-500/20 text-amber-300 border border-amber-400/50 shadow-[0_0_12px_rgba(245,158,11,0.25)] font-semibold'
+                  : 'text-slate-300 hover:text-white hover:bg-white/10'
+              }`}
+            >
+              Fund Tracing
+            </Link>
+            <Link
+              to="/app/history"
+              className={`px-3 py-1.5 rounded-md text-xs transition-all ${
+                location.pathname === '/app/history'
+                  ? 'bg-amber-500/20 text-amber-300 border border-amber-400/50 shadow-[0_0_12px_rgba(245,158,11,0.25)] font-semibold'
+                  : 'text-slate-300 hover:text-white hover:bg-white/10'
+              }`}
+            >
+              History
+            </Link>
+            <Link
+              to="/app/reports"
+              className={`px-3 py-1.5 rounded-md text-xs transition-all ${
+                location.pathname === '/app/reports'
+                  ? 'bg-amber-500/20 text-amber-300 border border-amber-400/50 shadow-[0_0_12px_rgba(245,158,11,0.25)] font-semibold'
+                  : 'text-slate-300 hover:text-white hover:bg-white/10'
+              }`}
+            >
+              Reports
+            </Link>
+          </nav>
         </div>
 
         {/* Right side actions */}
@@ -92,16 +94,18 @@ export const Navbar: React.FC = () => {
           {/* Live System Health Pill */}
           <Link
             to="/app/settings"
-            className="flex items-center gap-2 px-2.5 py-1 rounded-full bg-[#0B1730] border border-[#06D9FF]/20 text-[11px] font-mono hover:border-[#06D9FF]/50 transition-colors"
+            className="flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/80 backdrop-blur-md border border-amber-500/30 text-xs font-mono shadow-[0_0_12px_rgba(245,158,11,0.15)] hover:border-amber-400/60 transition-colors"
             title="Click to view full service diagnostic status"
           >
             <span
               className={`w-2 h-2 rounded-full ${
-                isHealthy ? 'bg-[#22C55E] animate-pulse' : 'bg-[#F59E0B]'
+                isHealthy
+                  ? 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.85)] animate-pulse'
+                  : 'bg-amber-400 status-pulse-amber animate-pulse'
               }`}
             />
-            <span className="text-[#94A3B8] hidden sm:inline">Engine:</span>
-            <span className={isHealthy ? 'text-[#22C55E]' : 'text-[#F59E0B]'}>
+            <span className="text-slate-300 hidden sm:inline">Engine:</span>
+            <span className={isHealthy ? 'text-emerald-400 font-bold' : 'text-amber-400 font-bold'}>
               {isHealthy ? 'Online' : 'Degraded'}
             </span>
           </Link>
@@ -109,15 +113,15 @@ export const Navbar: React.FC = () => {
           {/* User State */}
           {isAuthenticated ? (
             <div className="flex items-center gap-2">
-              <div className="flex items-center gap-2 px-2.5 py-1 bg-[#06132D] border border-white/10 rounded-md text-xs">
-                <Shield className="w-3.5 h-3.5 text-[#06D9FF]" />
-                <span className="font-mono text-[#F8FAFC] max-w-[120px] truncate">
+              <div className="flex items-center gap-2 px-2.5 py-1 bg-slate-900/80 border border-white/15 rounded-md text-xs">
+                <Shield className="w-3.5 h-3.5 text-blue-400" />
+                <span className="font-mono text-white max-w-[120px] truncate">
                   {user?.name || user?.email}
                 </span>
               </div>
               <button
                 onClick={logout}
-                className="p-1.5 rounded-md text-[#94A3B8] hover:text-[#EF4444] hover:bg-[#0B1730] transition-colors"
+                className="p-1.5 rounded-md text-slate-300 hover:text-red-400 hover:bg-white/10 transition-colors"
                 title="Log Out"
               >
                 <LogOut className="w-4 h-4" />
@@ -127,14 +131,14 @@ export const Navbar: React.FC = () => {
             <div className="flex items-center gap-2">
               <button
                 onClick={demoLogin}
-                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-[#2563EB] hover:bg-[#1d4ed8] text-white rounded-md shadow-glow-blue transition-all"
+                className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-md text-xs font-semibold bg-gradient-to-r from-red-600 via-rose-600 to-red-700 hover:from-red-500 hover:to-rose-500 text-white shadow-md rby-red-glow transition border border-rose-400/40"
               >
                 <Play className="w-3.5 h-3.5 fill-current" />
                 <span>Demo Access</span>
               </button>
               <Link
                 to="/login"
-                className="px-3 py-1.5 text-xs font-medium text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#0B1730] rounded-md transition-colors"
+                className="text-xs font-semibold text-slate-200 hover:text-amber-300 px-2 py-1.5 transition"
               >
                 Sign In
               </Link>
@@ -142,6 +146,6 @@ export const Navbar: React.FC = () => {
           )}
         </div>
       </div>
-    </nav>
+    </header>
   );
 };

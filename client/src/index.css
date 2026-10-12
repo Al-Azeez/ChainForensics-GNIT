@@ -4,44 +4,113 @@
 
 @layer base {
   body {
-    background-color: #020817;
+    background-color: #0c1222;
     color: #F8FAFC;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Sora', 'Inter', system-ui, -apple-system, sans-serif;
   }
+}
+
+/* Stitch Red-Blue-Yellow Dynamic Atmospheric Glow & Canvas */
+.rby-canvas-bg {
+  background-color: #0c1222;
+  background-image: 
+    radial-gradient(circle at 10% 15%, rgba(190, 18, 60, 0.42) 0%, transparent 45%),
+    radial-gradient(circle at 88% 20%, rgba(29, 78, 216, 0.45) 0%, transparent 48%),
+    radial-gradient(circle at 50% 65%, rgba(217, 119, 6, 0.28) 0%, transparent 52%),
+    radial-gradient(circle at 85% 85%, rgba(136, 19, 55, 0.35) 0%, transparent 45%),
+    radial-gradient(circle at 20% 80%, rgba(37, 99, 235, 0.32) 0%, transparent 45%);
+  background-attachment: fixed;
+}
+
+.rby-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(245, 158, 11, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(59, 130, 246, 0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.status-pulse-amber {
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.85);
+}
+
+/* Frosted Glass Panels with Tinted Red-Blue-Yellow Border Accents */
+.rby-panel {
+  background: rgba(13, 20, 38, 0.80);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  transition: all 0.25s ease;
+}
+
+.rby-panel:hover {
+  border-color: rgba(245, 158, 11, 0.38);
+  box-shadow: 0 12px 36px -8px rgba(30, 58, 138, 0.4);
+}
+
+.rby-panel-blue {
+  border-top: 2px solid #3B82F6;
+  border-color: rgba(59, 130, 246, 0.35);
+}
+
+.rby-panel-amber {
+  border-top: 2px solid #F59E0B;
+  border-color: rgba(245, 158, 11, 0.35);
+}
+
+.rby-panel-red {
+  border-top: 2px solid #EF4444;
+  border-color: rgba(239, 68, 68, 0.35);
+}
+
+.rby-amber-glow {
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.45);
+}
+
+.rby-amber-glow:hover {
+  box-shadow: 0 0 24px rgba(245, 158, 11, 0.65);
+}
+
+.rby-red-glow {
+  box-shadow: 0 0 18px rgba(225, 29, 72, 0.4);
+}
+
+.rby-red-glow:hover {
+  box-shadow: 0 0 24px rgba(225, 29, 72, 0.65);
 }
 
 /* Custom Glassmorphism & Cyber Aesthetics */
 .glass-panel {
-  background: rgba(11, 23, 48, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(6, 217, 255, 0.12);
+  background: rgba(13, 20, 38, 0.80);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
 }
 
 .glass-panel-interactive {
-  background: rgba(11, 23, 48, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(6, 217, 255, 0.12);
+  background: rgba(13, 20, 38, 0.80);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .glass-panel-interactive:hover {
-  border-color: rgba(6, 217, 255, 0.35);
-  box-shadow: 0 0 25px -5px rgba(6, 217, 255, 0.2), 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  border-color: rgba(245, 158, 11, 0.38);
+  box-shadow: 0 0 25px -5px rgba(245, 158, 11, 0.25), 0 8px 32px 0 rgba(0, 0, 0, 0.5);
   transform: translateY(-2px);
 }
 
 .glow-border-cyan {
-  box-shadow: 0 0 15px -3px rgba(6, 217, 255, 0.3);
+  box-shadow: 0 0 15px -3px rgba(59, 130, 246, 0.4);
 }
 
 .cyber-grid {
-  background-size: 40px 40px;
+  background-size: 32px 32px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(to right, rgba(245, 158, 11, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
 }
 
 /* Custom scrollbars */
