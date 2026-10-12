@@ -1,0 +1,15 @@
+{
+  "name": "chainforensics-monorepo",
+  "version": "1.0.0",
+  "description": "ChainForensics: AI-Powered Blockchain Transaction Intelligence & Forensics Platform",
+  "private": true,
+  "scripts": {
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
+    "build:server": "npm --prefix server run build",
+    "build:client": "npm --prefix client run build",
+    "test:server": "npm --prefix server test",
+    "test:client": "npm --prefix client test",
+    "install:all": "npm --prefix server install && npm --prefix client install"
+  }
+}
