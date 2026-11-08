@@ -353,7 +353,13 @@ export async function getAllInvestigations(req: AuthRequest, res: Response) {
 
 export async function getInvestigationById(req: AuthRequest, res: Response) {
   try {
-    const { id } = req.params;
+    const id = Array.isArray(req.params.id)
+  ? req.params.id[0]
+  : req.params.id;
+
+if (!id) {
+  return res.status(400).json({ error: 'Invalid investigation ID' });
+}
     const isDbConnected = mongoose.connection.readyState === 1;
 
     if (isDbConnected) {
@@ -376,7 +382,13 @@ export async function getInvestigationById(req: AuthRequest, res: Response) {
 
 export async function updateInvestigation(req: AuthRequest, res: Response) {
   try {
-    const { id } = req.params;
+   const id = Array.isArray(req.params.id)
+  ? req.params.id[0]
+  : req.params.id;
+
+if (!id) {
+  return res.status(400).json({ error: 'Invalid investigation ID' });
+}
     const parseResult = UpdateInvestigationSchema.safeParse(req.body);
     if (!parseResult.success) {
       return res.status(400).json({ error: parseResult.error.errors[0].message });
@@ -411,7 +423,13 @@ export async function updateInvestigation(req: AuthRequest, res: Response) {
 
 export async function deleteInvestigation(req: AuthRequest, res: Response) {
   try {
-    const { id } = req.params;
+    const id = Array.isArray(req.params.id)
+  ? req.params.id[0]
+  : req.params.id;
+
+if (!id) {
+  return res.status(400).json({ error: 'Invalid investigation ID' });
+}
     const isDbConnected = mongoose.connection.readyState === 1;
 
     if (isDbConnected) {

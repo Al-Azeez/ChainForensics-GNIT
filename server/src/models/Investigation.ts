@@ -106,11 +106,30 @@ const InvestigationSchema = new Schema<IInvestigation>(
       failedTxCount: { type: Number, default: 0 }
     },
     featureSet: { type: Schema.Types.Mixed, default: {} },
-    ruleFindings: { type: [Schema.Types.Mixed], default: [] },
-    anomalyFindings: { type: Schema.Types.Mixed, default: {} },
-    mlFindings: { type: Schema.Types.Mixed, default: {} },
-    riskAssessment: { type: Schema.Types.Mixed, required: true },
-    rawTransactions: { type: [Schema.Types.Mixed], default: [] },
+   ruleFindings: {
+  type: [Schema.Types.Mixed],
+  default: []
+} as any,
+
+anomalyFindings: {
+  type: Schema.Types.Mixed,
+  default: {}
+},
+
+mlFindings: {
+  type: Schema.Types.Mixed,
+  default: {}
+},
+
+riskAssessment: {
+  type: Schema.Types.Mixed,
+  required: true
+},
+
+rawTransactions: {
+  type: [Schema.Types.Mixed],
+  default: []
+} as any,
     graphData: {
       nodes: { type: [Schema.Types.Mixed], default: [] },
       edges: { type: [Schema.Types.Mixed], default: [] }

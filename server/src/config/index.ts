@@ -17,6 +17,10 @@ export const config: AppConfig = {
   mongoUri: process.env.MONGODB_URI || 'mongodb://localhost:27017/chainforensics',
   ethereumRpcUrl: process.env.ETHEREUM_RPC_URL || 'https://ethereum.publicnode.com',
   aiServiceUrl: process.env.AI_SERVICE_URL || 'http://127.0.0.1:8000',
-  jwtSecret: process.env.JWT_SECRET || 'chainforensics_super_secret_jwt_key_development_only_2026',
+  jwtSecret: process.env.JWT_SECRET || (
+  process.env.NODE_ENV === 'production'
+    ? (() => { throw new Error('JWT_SECRET is required in production'); })()
+    : 'development_only_secret'
+),
   corsOrigin: process.env.CORS_ORIGIN || '*'
 };

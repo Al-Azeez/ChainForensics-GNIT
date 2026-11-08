@@ -2,28 +2,34 @@ import mongoose from 'mongoose';
 import { app } from './app.js';
 import { config } from './config/index.js';
 
-async function startServer() {
-  console.log('='.repeat(50));
-  console.log('Initializing ChainForensics Server...');
-  console.log('='.repeat(50));
+let isConnected = false;
 
-  // Connect to MongoDB Atlas / Local MongoDB
+async function connectDatabase() {
+  if (isConnected) return;
+
   try {
-    console.log(`Connecting to MongoDB at: ${config.mongoUri.replace(/:([^:@]{4,})@/, ':****@')}...`);
     await mongoose.connect(config.mongoUri, {
-      serverSelectionTimeoutMS: 4000
+      serverSelectionTimeoutMS: 10000
     });
-    console.log('MongoDB Atlas / Local Database connected successfully.');
-  } catch (err: any) {
-    console.warn('MongoDB connection failed or skipped. Running with In-Memory Storage Mode for seamless standalone execution.');
-  }
 
-  app.listen(config.port, '0.0.0.0', () => {
-    console.log(`ChainForensics Server is listening on http://0.0.0.0:${config.port}`);
-    console.log(`Health Check: http://localhost:${config.port}/api/health`);
-    console.log(`AI Engine Target: ${config.aiServiceUrl}`);
-    console.log(`Ethereum Provider: ${config.ethereumRpcUrl}`);
-  });
+    isConnected = true;
+    console.log('MongoDB connected successfully.');
+  } catch (error) {
+    isConnected = false;
+    console.error('MongoDB connection failed:', error);
+    throw error;
+  }
 }
 
-startServer();
+app.use(async (req, res, next) => {
+  try {
+    await connectDatabase();
+    next();
+  } catch (error) {
+    res.status(503).json({
+      error: 'Database connection unavailable'
+    });
+  }
+});
+
+export default app;

@@ -65,3 +65,4 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
     error: err.message || 'Internal Server Error'
   });
 });
+export default app;
