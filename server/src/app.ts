@@ -13,8 +13,12 @@ app.use(helmet({
   crossOriginResourcePolicy: { policy: 'cross-origin' }
 }));
 
+const allowedOrigin = config.corsOrigin
+  .trim()
+  .replace(/\/+$/, '');
+
 app.use(cors({
-  origin: config.corsOrigin === '*' ? true : config.corsOrigin,
+  origin: allowedOrigin === '*' ? true : allowedOrigin,
   credentials: true
 }));
 
