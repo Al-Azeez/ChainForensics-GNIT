@@ -11,5 +11,8 @@
     "test:server": "npm --prefix server test",
     "test:client": "npm --prefix client test",
     "install:all": "npm --prefix server install && npm --prefix client install"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21"
   }
 }
